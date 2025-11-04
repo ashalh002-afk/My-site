@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Главная — Мой сайт</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="logo">
+        <!-- логотип: замени src на своё изображение -->
+        <img src="https://via.placeholder.com/60x60.png?text=Logo" alt="Логотип">
+        <div>
+          <h1 style="margin:0">Аширов Алихан</h1>
+          <div style="font-size:13px;color:#555">Автор сайта — Алихан, контакты: ashalh002@gmail.com</div>
+        </div>
+      </div>
+      <div>
+        <!-- управление (попытки установить стартовую/избранное — могут быть заблокированы в современных браузерах) -->
+        <button onclick="setHomepage()">Сделать стартовой</button>
+        <button onclick="addFavorite()">Добавить в избранное</button>
+      </div>
+    </header>
+
+    <div class="marquee">
+      <!-- бегущая строка (deprecated, но для учебного примера) -->
+      <marquee behavior="scroll" direction="left">Добро пожаловать на мой сайт — здесь моя автобиография, хобби, фото, планы и выполненные работы.</marquee>
+    </div>
+
+    <nav class="main-menu">
+      <ul class="menu-list">
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="autobiography.html">Автобиография</a></li>
+        <li><a href="hobbies.html">Хобби</a></li>
+        <li><a href="friends.html">Друзья</a></li>
+        <li><a href="plans.html">Планы</a></li>
+        <li><a href="topics.html">Выполненные работы</a></li>
+      </ul>
+    </nav>
+
+    <section class="section">
+      <h2>Обо мне</h2>
+      <p>Привет! Меня зовут <strong>Алихан</strong>. Здесь вы найдете информацию обо мне.</p>
+
+      <div class="flex-row">
+        <div class="card">
+          <h3>Коротко обо мне</h3>
+          <p>Учусь в АУЭСе; 
+            интересы: программирование, игры, спорт. 
+            Контакты: +7 702 223 5333, ashalh002@gmail.com</p>
+        </div>
+  </section>
+
+    <section class="section">
+      <h3>Моя любимоя песня</h3>
+      <!-- аудио (автозапуск часто блокируется — оставил controls) -->
+      <p>Justin Timberlake - Señorita</p>
+<p>Клип трека</p>
+<div style="text-align:center; margin-top:10px; margin-bottom:20px;">
+  <iframe width="560" height="315"
+    src="https://www.youtube.com/embed/nJHYDkvRB2Y"
+    title="Justin Timberlake - Señorita"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+</div>
+
+    <section class="section">
+      <h3>Поиск информации</h3>
+      <p>Wikipedia</p>
+      <iframe src="https://en.wikipedia.org/wiki/Main_Page" width="100%" height="300" title="Встраиваемая страница"></iframe>
+    </section>
+
+    <section class="section" id="search-area">
+      <h3>Поиск по странице</h3>
+      <form id="searchForm" onsubmit="return doSearch()">
+        <input type="text" id="searchInput" placeholder="Введите слово для поиска">
+        <button type="submit">Искать</button>
+        <button type="button" onclick="clearSearch()">Очистить</button>
+      </form>
+      <p id="searchResult"></p>
+    </section>
+
+    <!-- таблица как пример -->
+    <section class="section">
+      <h3>Краткая таблица</h3>
+      <table>
+        <thead><tr><th>Год</th><th>Событие</th><th>Достижение</th></tr></thead>
+        <tbody>
+          <tr><td>2025</td><td>Окончил школу</td><td>Аттестат с отличием</td></tr>
+          <tr><td>2025</td><td>Поступил в АУЭС</td><td>Грант</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- нижние кнопки — как в задании -->
+    <div class="bottom-buttons">
+      <button onclick="location.href='index.html'">Главная страница</button>
+      <button onclick="location.href='autobiography.html'">Автобиография</button>
+      <button onclick="location.href='hobbies.html'">Хобби и достижения</button>
+      <button onclick="location.href='friends.html'">Друзья и воспоминания</button>
+      <button onclick="location.href='plans.html'">Планы на жизнь</button>
+      <button onclick="location.href='topics.html'">Выполненные работы</button>
+    </div>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> Алихан А. <a href="#search-area">Поиск</a></p>
+    </footer>
+  </div>
+
+  <script>
+    // год в футере
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Поисковая функция по текущей странице (ищет слова в тексте)
+    function doSearch(){
+      clearSearch();
+      const q = document.getElementById('searchInput').value.trim();
+      if(!q){ alert('Введите слово для поиска.'); return false; }
+      const bodyText = document.body.innerText;
+      if(bodyText.toLowerCase().includes(q.toLowerCase())){
+        document.getElementById('searchResult').textContent = 'Найдено на странице — проверьте подсвеченные фрагменты (если есть).';
+        // подсветка всех вхождений (простой подход: заменяем в HTML — аккуратно)
+        highlight(q);
+      } else {
+        document.getElementById('searchResult').textContent = 'Ничего не найдено на этой странице.';
+      }
+      return false; // не отправлять форму
+    }
+
+    function highlight(term){
+      if(!term) return;
+      const walk = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+      const nodes = [];
+      while(walk.nextNode()) nodes.push(walk.currentNode);
+      for(const node of nodes){
+        const val = node.nodeValue;
+        const idx = val.toLowerCase().indexOf(term.toLowerCase());
+        if(idx>=0 && node.parentNode && node.parentNode.tagName !== 'SCRIPT' && node.parentNode.tagName !== 'STYLE'){
+          const span = document.createElement('span');
+          const before = document.createTextNode(val.slice(0, idx));
+          const match = document.createElement('span');
+          match.className = 'highlight';
+          match.textContent = val.slice(idx, idx + term.length);
+          const after = document.createTextNode(val.slice(idx + term.length));
+          span.appendChild(before); span.appendChild(match); span.appendChild(after);
+          node.parentNode.replaceChild(span, node);
+        }
+      }
+    }
+    function clearSearch(){
+      // перезагрузим страницу чтобы убрать подсветку (простой путь)
+      // но для UX мы просто восстановим HTML: лучше — перезагрузить
+      // оставим мягкую опцию:
+      document.getElementById('searchResult').textContent = '';
+      // простая очистка поля
+      // (если вы хотите убрать подсветку, обновите страницу)
+    }
+
+    // Попытка добавить в избранное / сделать стартовой страницу — большинство браузеров не поддерживают это
+    function addFavorite(){
+      const url = location.href;
+      const title = document.title;
+      try{
+        if(window.external && ('AddFavorite' in window.external)) {
+          // IE
+          window.external.AddFavorite(url, title);
+        } else {
+          // для современных браузеров — показать инструкцию
+          alert('Современные браузеры не позволяют автоматически добавлять в закладки. Для добавления нажмите Ctrl+D (Cmd+D на Mac).');
+        }
+      } catch(e){
+        alert('Браузер ограничивает добавление в избранное. Попробуйте Ctrl+D.');
+      }
+    }
+
+    function setHomepage(){
+      try {
+        // IE legacy
+        document.body.style.behavior = 'url(#default#homepage)';
+        document.body.setHomePage(location.href);
+      } catch(e){
+        alert('Установка стартовой страницы автоматически не поддерживается в современных браузерах. Установите вручную в настройках браузера.');
+      }
+    }
+  </script>
+</body>
+</html>
