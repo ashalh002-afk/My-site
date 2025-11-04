@@ -1,0 +1,66 @@
+/* style.css — общий стиль: белый фон, черный текст, простая центровка */
+* { box-sizing: border-box; }
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+  color: #000;
+  line-height: 1.5;
+}
+.container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+}
+.header {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 10px;
+}
+.logo {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.logo img { width:60px; height:60px; border-radius:6px; }
+nav.main-menu {
+  margin-top:10px;
+  border-top:1px solid #ddd;
+  padding-top:10px;
+}
+.menu-list { list-style:none; padding:0; display:flex; gap:10px; }
+.menu-list li { }
+.menu-list a { text-decoration:none; color:#000; padding:6px 10px; border:1px solid #00000008; border-radius:4px; }
+.marquee { margin:10px 0; font-weight:600; }
+
+/* content sections */
+.section { margin:16px 0; padding:12px; border:1px solid #f0f0f0; border-radius:6px; background:#fff; }
+.flex-row { display:flex; gap:12px; flex-wrap:wrap; }
+.card { border:1px solid #eee; padding:10px; border-radius:6px; width:calc(50% - 12px); }
+@media (max-width:600px) { .card{width:100%} }
+
+/* buttons / bottom nav */
+.bottom-buttons { display:flex; gap:8px; flex-wrap:wrap; margin-top:18px; }
+.bottom-buttons button {
+  padding:8px 12px;
+  border-radius:6px;
+  border:1px solid #333;
+  background:#fff;
+  cursor:pointer;
+}
+.footer {
+  margin-top:20px;
+  padding-top:10px;
+  border-top:1px solid #eee;
+  font-size:14px;
+  color:#333;
+}
+
+/* table style */
+table { width:100%; border-collapse:collapse; }
+table th, table td { border:1px solid #ddd; padding:8px; text-align:left; }
+
+/* simple highlight for search results */
+.highlight { background: yellow; }

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Выполненные работы</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Информация по выполненным работам</h2>
+    <section class="section">
+      <p>Здесь перечислены работы, которые я сделал.</p>
+
+      <h3>Список тем</h3>
+      <ol>
+        <li>Word <a href="#">Прикреплённый файл </a></li>
+        <li>Excel <a href="#">Прикреплённый файл </a></li>
+        <li>VBA <a href="#">Прикреплённый файл </a></li>
+      </ol>
+
+      <h3>Форма загрузки </h3>
+      <form onsubmit="return fakeUpload()">
+        <label>Выберите файл: <input type="file" id="fileInput"></label><br><br>
+        <button type="submit">Загрузить </button>
+      </form>
+      <p id="uploadStatus"></p>
+    </section>
+
+    <div class="bottom-buttons">
+      <button onclick="location.href='index.html'">Главная</button>
+      <button onclick="location.href='autobiography.html'">Автобиография</button>
+      <button onclick="location.href='hobbies.html'">Хобби</button>
+      <button onclick="location.href='friends.html'">Друзья</button>
+      <button onclick="location.href='plans.html'">Планы</button>
+      <button onclick="location.href='topics.html'">Выполненные работы</button>
+    </div>
+  </div>
+
+  <script>
+    function fakeUpload(){
+      const fi = document.getElementById('fileInput');
+      if(fi.files.length === 0){ alert('Выберите файл'); return false; }
+      document.getElementById('uploadStatus').textContent = 'Файл "' + fi.files[0].name + '" якобы загружен (эмуляция для локального сайта).';
+      return false;
+    }
+  </script>
+</body>
+</html>
